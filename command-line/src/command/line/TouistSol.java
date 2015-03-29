@@ -48,40 +48,43 @@ public class TouistSol {
     
     public static void help(){
         
-        System.out.println("***************************************************************************");
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        System.out.println("* Usage: TouistSol [Options...] filename                                    *");
+        System.out.println("* General options:                                                          *");
+        System.out.println("*  --cnf          read & resolve CNF problem in DIMACS format               *");
+        System.out.println("*  --s            read & resolve TouIST problem in TOUISTL format           *");
+        System.out.println("*  --t            read TouIST problem in TOUISTL format and build           *");
+        System.out.println("*                 (DIMACS format, Hash CNF table)                           *");
         
         
         
         
-        
-        
-        
-        
-        
-        System.out.println("*TouISTSOL v1.0,2015. Easily formalize and solve real-world sized problems*\n" +
-                           "*using propositional logic and linear theory of reals                     *");
-        System.out.println("*See TouIST Language on : www.irit.fr/~sdqsd/grammar.pdf                  *");
-        System.out.println("*No input problem file specified; try TouISTSol --help                    *");
-        System.out.println("***************************************************************************");
+        System.out.println("*  -h, --help     display this help information and exit                    *");
+        System.out.println("*  -v, --version  display program version and exit                          *");
+        System.out.println("*                                                                           *");
+        System.out.println("*  -v, --version  display program version and exit                          *");
+        System.out.println("* TouISTSOL v1.0,2015. Easily formalize and solve real-world sized problems *\n" +
+                           "* using propositional logic and linear theory of reals                      *");
+        System.out.println("* See TouIST Language on : www.irit.fr/~sdqsd/grammar.pdf                   *");
+        System.out.println("* No input problem file specified; try TouISTSol --help                     *");
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     }
     public static void version(){
-        System.out.println("***************************************************************************");
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
+        System.out.println("* TouISTSOL: TouIST Propositional logic/Linear Theory of reals Solver, v1.0   *\n"
+                         + "*                                                                             *\n" +
+                           "* Copyright (C) 2015. Toulouse Institute of Computer Science Research,France. *\n" +
+                           "* All rights reserved.Email:<.....@irit.fr>                                   *\n"+
+                           "* Contributors:                                                               *\n" +
+                           "*     Khaled Skander Ben Slimane, Alexis Comte, Olivier Gasquet,              *\n" +
+                           "*     Abdelwahab Heba, Olivier Lezaud, Frédéric Maris, Maël Valais            *\n"
+                        +  "*                                                                             *");
         
-        System.out.println("*TouISTSOL: TouIST Propositional logic/Linear Theory of reals Solver, v1.0  *\n"
-                         + "*                                                                           *\n" +
-                           "*Copyright (C) 2015. Toulouse Institute of Computer Science Research,France.*\n" +
-                           "*All rights reserved.Email:<.....@irit.fr>                                  *\n"+
-                           "*Contributors:                                                              *\n" +
-                           "*     Khaled Skander Ben Slimane, Alexis Comte, Olivier Gasquet,            *\n" +
-                           "*     Abdelwahab Heba, Olivier Lezaud, Frédéric Maris, Maël Valais          *\n"
-                        +  "*                                                                           *");
-        
-        System.out.println("*This program is free software; you may re-distrubute it under the terme of *\n"+
-                           "*the GNU Lesser General Public License (LGPL) version 2.1 which accompanies *\n"
-                         + "*this distribution, and is available at :                                   *\n"
-                         + "*http://www.gnu.org/licenses/lgpl-2.1.html                                  *"
-                        );
-        System.out.println("***************************************************************************");
+        System.out.println("* This program is free software; you may re-distrubute it under the terme of  *\n"+
+                           "* the GNU Lesser General Public License (LGPL) version 2.1 which accompanies  *\n"
+                         + "* this distribution, and is available at :                                    *\n"
+                         + "* http://www.gnu.org/licenses/lgpl-2.1.html                                   *");
+        System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     }
     public static void empty(String arg,int number){
     if(number==1){
@@ -109,11 +112,11 @@ public class TouistSol {
         }
     }
     }
-    public static void solvetouISTL(String path) throws IOException, InterruptedException{
+    public static void solvetouISTL(String path,int nb) throws IOException, InterruptedException{
         Translator translator = new Translator("compiler"+File.separatorChar+"touistc.native");
         if(translator.translate(path))
         {
-            Minisat solver= new Minisat(translator.getDimacsFilePath(),5,translator.getLiteralsMap());
+            Minisat solver= new Minisat(translator.getDimacsFilePath(),nb,translator.getLiteralsMap());
             Models m=solver.resolveTouISTLProblem();
             for (Model m1: m.getModels()){
                 System.out.println(m1.toString());
@@ -159,17 +162,21 @@ public class TouistSol {
         /* 
          * TODO code application logic here
          */
-        String a[]={"--cnf","term1_gr_2pin_w4.shuffled.cnf","1"};
+        String a[]={"-v","term1_gr_2pin_w4.shuffled.cnf","1"};
             switch(a[0]){
                 //General Option
                 case "--help": help();System.exit(0);
                 case "-h": help();System.exit(0);
                 case "--version": version();System.exit(0);
                 case "-v": version();System.exit(0);
+                //Solver Option SAT:
                 //Using TouIST Language
-                case "--s": if(a.length==2){ 
-                    if(new File(CurrentPath+File.separatorChar+a[1]).isDirectory())
-                    solvetouISTL(CurrentPath+File.separatorChar+a[1]);
+                case "--t": System.exit(0);
+                case "--s": if(a.length==3){ 
+                    String path=CurrentPath+File.separatorChar+a[1];
+                    File f=new File(path);
+                    if(f.isFile() && path.endsWith(".touistl"))
+                    solvetouISTL(CurrentPath+File.separatorChar+a[1],Integer.parseInt(a[2]));
                     else
                     {
                        System.out.println("test_reussi");
@@ -178,15 +185,17 @@ public class TouistSol {
                     else empty(a[0],3);System.exit(0);
                //Using CNF format
                 case "--cnf": if(a.length==3){
-                            //File f=new File(CurrentPath+File.separatorChar+a[1]);    
-                            //if(f.isDirectory())
+                          String path=CurrentPath+File.separatorChar+a[1];
+                          File f=new File(path);
+                            if(f.isFile() && path.endsWith(".cnf"))
                                     solveCNF(CurrentPath+File.separatorChar+a[1],Integer.parseInt(a[2]));
-                              //  else
-                                //    System.out.println("not file");
+                              else
+                                    System.out.println("not file");
                             }
                               else
                                 if(a.length==2)
                                System.exit(0);
+                //Solver Option SMT
                 case "--smt":
                             System.exit(0);
                 default: if(a.length==0) empty(null,1);else empty(a[0],2);System.exit(0);
