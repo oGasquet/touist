@@ -81,3 +81,5 @@ bigAndFile-defaultname.txt
 *.table
 
 *.cnf
+/command-line/nbproject/private/
+/command-line/build/
