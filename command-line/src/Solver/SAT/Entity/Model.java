@@ -25,7 +25,7 @@ public class Model {
     }
     public String toString() {
 		// TODO Please write a proper toString
-		String out = "Modele: {";
+		String out = "Modele (Literals Valuated=True):\n {";
 		for (Literal s : literals) {
                    // out = out + " " + s.getLiteral()+ " Valuated : "+s.isLiteral_positivity()+"\n";
                     if(s.isLiteral_positivity())

@@ -9,12 +9,15 @@ import Solver.SAT.Entity.Models;
 import Solver.SAT.Minisat;
 import Translator.Translator;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -55,7 +58,8 @@ public class TouistSol {
         System.out.println("*  --s            read & resolve TouIST problem in TOUISTL format           *");
         System.out.println("*  --t            read TouIST problem in TOUISTL format and build           *");
         System.out.println("*                 (DIMACS format, Hash CNF table)                           *");
-        
+        System.out.println("*  -o filename,--output filename                                            *\n"
+                +          "*                 write solution to filename in printable format            *");
         
         
         
@@ -65,8 +69,8 @@ public class TouistSol {
         System.out.println("*  -v, --version  display program version and exit                          *");
         System.out.println("* TouISTSOL v1.0,2015. Easily formalize and solve real-world sized problems *\n" +
                            "* using propositional logic and linear theory of reals                      *");
-        System.out.println("* See TouIST Language on : www.irit.fr/~sdqsd/grammar.pdf                   *");
-        System.out.println("* No input problem file specified; try TouISTSol --help                     *");
+        System.out.println("* See TouIST web page at : www.irit.fr/softwave/.../touIST.html             *");
+        System.out.println("*                                                                           *");
         System.out.println("* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *");
     }
     public static void version(){
@@ -88,10 +92,8 @@ public class TouistSol {
     }
     public static void empty(String arg,int number){
     if(number==1){
-    //System.out.println("************************************************************************************");
     System.out.println("TouISTSOL v1.0,2015.");
     System.out.println("No input option; try TouISTSol --help                             ");
-    //System.out.println("************************************************************************************");
     }
     else{
         if(number==2)
@@ -101,14 +103,12 @@ public class TouistSol {
         }
         if(number==3)
         {
-    //System.out.println("************************************************************************************");
     System.out.println("TouISTSOL v1.0,2015.");
     System.out.println("Parameter(s) specified in the command line:\n "+arg);
     System.out.println("No input problem file specified; try TouISTSol --help                             ");
-    //System.out.println("************************************************************************************");  
         }
         if(number==4){
-            
+         System.out.println("No output solution file specified");
         }
     }
     }
@@ -124,7 +124,7 @@ public class TouistSol {
         }
     }
     
-    public static void solveCNF(String path,int nb) throws FileNotFoundException, IOException{
+    public static void solveCNF(String path,int nb,int control,String pathSave) throws FileNotFoundException, IOException{
         Map<Integer,String> mp=new HashMap<Integer,String>();
         File f=new File(path);
         BufferedReader br=new BufferedReader(new FileReader(f));
@@ -145,24 +145,41 @@ public class TouistSol {
         Minisat solver=new Minisat(path,nb,mp);
         
         Models m=solver.resolveTouISTLProblem();
-        //System.out.print("Modele:{");
-            for (Model m1: m.getModels()){
-                System.out.print(m1.toString());
+        StringBuilder str=new StringBuilder();
+        for (Model m1: m.getModels()){
+                str.append(m1.toString()+"\n");
             }
-       //System.out.println("");
-        // Minisat solver1=new Minisat(path,nb);
-        //StringBuffer br1=solver1.resolveCNFProblem();
-        //String[] br2=br1.toString().split("\n");
-         //  for (String m1: br2){
-          //      System.out.println(m1.toString());
-           // }
-        
+        if(control==1)
+            System.out.println(str.toString());
+        else
+           Output(pathSave,str.toString());
+    }
+    public static void translate(String path) throws IOException, InterruptedException{
+        Translator translator = new Translator("compiler"+File.separatorChar+"touistc.native");
+        if(translator.translate(path))
+        {
+         System.out.println("CNF FILE :"+translator.getDimacsFilePath());
+         System.out.println("<Key,Literal>: \n");
+          while(translator.getLiteralsMap().entrySet().iterator().hasNext()){
+              Map.Entry<Integer, String> e= translator.getLiteralsMap().entrySet().iterator().next();
+              System.out.println(e.getKey()+" "+e.getValue());
+          }
+        }
+    }
+    
+    public static void Output(String nameFile,String out) throws IOException{
+        BufferedWriter wr=new BufferedWriter(new FileWriter(nameFile));
+        wr.write(out);
+        wr.flush();
+        wr.close();
     }
     public static void main(String[] args) throws IOException, InterruptedException {
         /* 
          * TODO code application logic here
          */
-        String a[]={"-v","term1_gr_2pin_w4.shuffled.cnf","1"};
+        String a[]={"--cnf","term1_gr_2pin_w4.shuffled.cnf","1","-o"};
+         String path="";
+         File f;
             switch(a[0]){
                 //General Option
                 case "--help": help();System.exit(0);
@@ -171,30 +188,42 @@ public class TouistSol {
                 case "-v": version();System.exit(0);
                 //Solver Option SAT:
                 //Using TouIST Language
-                case "--t": System.exit(0);
+                case "--t":   
+                    path=CurrentPath+File.separatorChar+a[1];
+                    f=new File(path);
+                    if(f.isFile() && path.endsWith(".touistl"))
+                        translate(path);
+                    System.exit(0);
                 case "--s": if(a.length==3){ 
-                    String path=CurrentPath+File.separatorChar+a[1];
-                    File f=new File(path);
+                    path=CurrentPath+File.separatorChar+a[1];
+                    f=new File(path);
                     if(f.isFile() && path.endsWith(".touistl"))
                     solvetouISTL(CurrentPath+File.separatorChar+a[1],Integer.parseInt(a[2]));
                     else
-                    {
-                       System.out.println("test_reussi");
-                    }
+                       System.out.println("le fichier doit etre d'extension .touisl");
                     }
                     else empty(a[0],3);System.exit(0);
                //Using CNF format
-                case "--cnf": if(a.length==3){
-                          String path=CurrentPath+File.separatorChar+a[1];
-                          File f=new File(path);
+                case "--cnf":  
+                    if( a.length==3 || a.length==5){
+                         path=CurrentPath+File.separatorChar+a[1];
+                          f=new File(path);
                             if(f.isFile() && path.endsWith(".cnf"))
-                                    solveCNF(CurrentPath+File.separatorChar+a[1],Integer.parseInt(a[2]));
-                              else
-                                    System.out.println("not file");
-                            }
-                              else
-                                if(a.length==2)
-                               System.exit(0);
+                            {  if(a.length==3)
+                                 solveCNF(CurrentPath+File.separatorChar+a[1],Integer.parseInt(a[2]),1,null);
+                                else
+                                 solveCNF(CurrentPath+File.separatorChar+a[1],Integer.parseInt(a[2]),0,CurrentPath+File.separatorChar+a[4]);
+                            }else
+                                 System.out.println("le fichier doit etre d'extension .cnf");
+                    }else{
+                        //System.out.println("eo"+a.length);
+                        if(a.length==4)
+                        {if(a[3].equals("-o") || a[3].equals("--output"))
+                                empty(null,4);
+                            else
+                            empty(a[3],3);}            
+                    }
+                      System.exit(0);
                 //Solver Option SMT
                 case "--smt":
                             System.exit(0);
