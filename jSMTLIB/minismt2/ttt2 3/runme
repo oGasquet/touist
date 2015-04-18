@@ -1,0 +1,13 @@
+#! /bin/sh
+DIR=$(dirname $0)
+export OCAMLRUNPARAM=${OCAMLRUNPARAM:-s=96k}
+if [ -z "$1" ]; then
+  echo "Usage: $0 <file> [timeout]"
+elif [ -e "$DIR/ttt2" ]; then
+  exec $DIR/ttt2 -s COMP -c $DIR/comp.conf "$@"
+elif [ -e Makefile ]; then
+  echo "Type 'make help' to get compilation instructions."
+else
+  echo "Could not find $DIR/ttt2 and this does not look like a source archive."
+  echo "Giving up."
+fi

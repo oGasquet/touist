@@ -1,0 +1,2 @@
+src/rewriting/build/rewriting.cmx: src/rewriting/build/function.cmx src/rewriting/build/monad.cmx src/parsec/parsec.cmxa src/rewriting/build/position.cmx src/util/util.cmxa src/rewriting/build/variable.cmx
+src/rewriting/build/rewriting.cmo: src/rewriting/build/function.cmo src/rewriting/build/monad.cmo src/parsec/parsec.cma src/rewriting/build/position.cmo src/util/util.cma src/rewriting/build/variable.cmo

@@ -1,0 +1,2 @@
+src/logic/build/binReal.cmx: src/logic/build/binRat.cmx src/logic/build/binType.cmx src/logic/build/formula.cmx src/logic/build/integer.cmx src/logic/build/monad.cmx src/logic/build/rational.cmx src/logic/build/real.cmx src/util/util.cmxa
+src/logic/build/binReal.cmo: src/logic/build/binRat.cmo src/logic/build/binType.cmo src/logic/build/formula.cmo src/logic/build/integer.cmo src/logic/build/monad.cmo src/logic/build/rational.cmo src/logic/build/real.cmo src/util/util.cma

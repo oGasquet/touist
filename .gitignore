@@ -83,3 +83,6 @@ bigAndFile-defaultname.txt
 *.cnf
 /command-line/nbproject/private/
 /command-line/build/
+/TP_CHORD/nbproject/private/
+/TP_CHORD/build/
+/command-line/dist/

@@ -3,7 +3,5 @@ begin sets
 end sets
 
 begin formula
-    bigand $i in $a:
-        A($i) and B($i)
-    end
+a and b and c
 end formula

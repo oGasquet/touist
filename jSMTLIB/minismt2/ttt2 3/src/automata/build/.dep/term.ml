@@ -1,0 +1,2 @@
+src/automata/build/term.cmx: src/automata/build/monad.cmx src/parsec/parsec.cmxa src/automata/build/parser.cmx src/automata/build/prelude.cmx src/automata/build/state.cmx src/automata/build/status.cmx src/util/util.cmxa
+src/automata/build/term.cmo: src/automata/build/monad.cmo src/parsec/parsec.cma src/automata/build/parser.cmo src/automata/build/prelude.cmo src/automata/build/state.cmo src/automata/build/status.cmo src/util/util.cma

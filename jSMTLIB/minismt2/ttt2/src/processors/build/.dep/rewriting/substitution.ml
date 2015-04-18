@@ -1,0 +1,2 @@
+src/processors/build/rewriting/substitution.cmx: src/processors/build/rewriting/monad.cmx src/processors/build/rewriting/prelude.cmx src/processors/build/rewriting/term.cmx src/util/util.cmxa src/processors/build/xmlOutput.cmx
+src/processors/build/rewriting/substitution.cmo: src/processors/build/rewriting/monad.cmo src/processors/build/rewriting/prelude.cmo src/processors/build/rewriting/term.cmo src/util/util.cma src/processors/build/xmlOutput.cmo

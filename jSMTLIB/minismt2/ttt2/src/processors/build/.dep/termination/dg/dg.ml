@@ -1,0 +1,2 @@
+src/processors/build/termination/dg/dg.cmx: src/processors/build/termination/dg/adg.cmx src/processors/build/termination/dg/cdg.cmx src/processors/build/termination/dg/edg.cmx src/processors/build/termination/dg/tdg.cmx
+src/processors/build/termination/dg/dg.cmo: src/processors/build/termination/dg/adg.cmo src/processors/build/termination/dg/cdg.cmo src/processors/build/termination/dg/edg.cmo src/processors/build/termination/dg/tdg.cmo

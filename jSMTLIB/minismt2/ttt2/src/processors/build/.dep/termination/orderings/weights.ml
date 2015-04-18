@@ -1,0 +1,2 @@
+src/processors/build/termination/orderings/weights.cmx: src/logic/logic.cmxa src/processors/build/rewriting/monad.cmx src/processors/build/rewriting/rewritingx.cmx src/util/util.cmxa src/processors/build/xmlOutput.cmx
+src/processors/build/termination/orderings/weights.cmo: src/logic/logic.cma src/processors/build/rewriting/monad.cmo src/processors/build/rewriting/rewritingx.cmo src/util/util.cma src/processors/build/xmlOutput.cmo

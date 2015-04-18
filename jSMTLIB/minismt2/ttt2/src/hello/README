@@ -1,0 +1,44 @@
+== src/hello ==
+A simple example executable. Run 'make hello' to build.
+
+Files:
+
+build.mk      - build system stuff.
+main.ml       - source file for executable; just calls Main.hello
+src/          - actual source files
+src/main.ml   - main module in pack
+src/hello.mli - pack interface
+src/hello.ml  - pack module
+
+== Make your own executables ==
+
+To create a new executable, create a new subdirectory containing
+a copy of build.mk, main.ml and a src/ subdirectory. Then change
+the main.ml file (to whatever your main module is) and adapt the
+variables set at the top of build.mk:
+
+  DIR  = the new subdirectory (src/foo)
+  PACK = the name of the generated pack (see below)
+  DEP  = packs the code depends on
+  FILES = list of source files relative to src/foo/src
+  GENERATED = here you may list files that will be produced
+    by ocamlyacc or ocamllex
+  PACKS_$(PACK) = packs the executable depends on. don't forget Foo itself.
+  EXECUTABLE_$(PACK) = the executable name
+
+Finally, add the new pack to the TOPLEVEL variable in Makefile.
+
+== On packs ==
+
+By design of the Ttt2 build system, the basic component being build is
+a /pack/, like Util, Rewriting and so on. To produce an executable, one
+first builds a pack containing all the modules that the executable needs.
+The pack can depend on other packs, which the ocaml code can then 'open'.
+
+For each pack Foo, an interface file (here: src/hello.mli) and a pack
+module (src/hello.ml) are required; inside hello.ml, one can
+'open Hellox;;'. Hellox contains the collection of all the pack modules,
+and is created using ocamlc -pack.
+
+For the executable itself, a small wrapper (main.ml) is created that
+only runs the main function from the newly created pack.

@@ -1,0 +1,29 @@
+to compile 0.6:
+ - get version 1.15 (or later) of TTT2 (http://cl-informatik.uibk.ac.at/software/ttt2)
+ - set path to ttt2 directory in MiniSMT Makefile (variable $(TTT2))
+ - type make
+ - type ./minismt -h to obtain information on usage and flags
+
+to compile 0.4:
+ - get version 1.08 or later of TTT2 (http://cl-informatik.uibk.ac.at/software/ttt2)
+   and follow the installation guidelines
+ - set path to ttt2 directory in MiniSMT Makefile (variable $(TTT2))
+ - type make
+ - type ./minismt -h to obtain information on usage and flags
+
+to compile 0.4beta:
+ - for 0.4beta, obtain PicoSat (http://fmv.jku.at/picosat/), compile it and
+   make the executable findable via the PATH environment variable.
+ - for 0.4beta, get version 1.08beta of TTT2
+   (http://cl-informatik.uibk.ac.at/software/minismt/download/ttt2-1.08beta.tar.gz)
+   and follow the installation guidelines
+ - set path to ttt2 in MiniSMT Makefile (variable $(TTT2))
+ - type make
+ - type ./minismt -h to obtain information on usage and flags
+
+to compile 0.3 or earlier
+ - get version 1.05 or later of TTT2 (http://cl-informatik.uibk.ac.at/software/ttt2)
+   and follow the installation guidelines
+ - set path to ttt2 in MiniSMT Makefile (variable $(TTT2))
+ - type make
+ - type ./minismt -h to obtain information on usage and flags

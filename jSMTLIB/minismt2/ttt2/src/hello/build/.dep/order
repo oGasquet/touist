@@ -1,0 +1,1 @@
+OBJS_Hello := src/hello/build/main.cmx

@@ -1,0 +1,53 @@
+#! /bin/sh
+# provide 'runme' script for cat / csi / ttt2
+
+umask 022
+
+DIR=build/$1
+
+if [ -z "$1" ]; then
+    echo "usage: $0 (cat|csi|ttt2)"
+    exit
+fi
+
+if [ ! -d "$DIR" ]; then
+    echo "$DIR/ does not exist."
+    exit 1
+fi
+
+cp ttt2 $DIR/$1
+
+case "$1" in
+cat)
+  cp comp.conf $DIR
+  CMD='$DIR/'$1' -cp PC -C "" -s COMPLEXITY -c $DIR/comp.conf "$@"'
+  ;;
+csi)
+  cp cr.conf $DIR
+  CMD='$DIR/'$1' -s AUTO -c $DIR/cr.conf "$@"'
+  ;;
+ttt2)
+  cp comp.conf $DIR
+  CMD='$DIR/'$1' -s COMP -c $DIR/comp.conf "$@"'
+  ;;
+*)
+  echo unrecognized tool $1
+  exit 1
+  ;;
+esac
+
+cat > $DIR/runme <<EOF
+#! /bin/sh
+DIR=\$(dirname \$0)
+export OCAMLRUNPARAM=\${OCAMLRUNPARAM:-s=96k}
+if [ -z "\$1" ]; then
+  echo "Usage: \$0 <file> [timeout]"
+elif [ -e "\$DIR/$0" ]; then
+  exec $CMD
+elif [ -e Makefile ]; then
+  echo "Type 'make help' to get compilation instructions."
+else
+  echo "Could not find \$DIR/$0 and this does not look like a source archive."
+  echo "Giving up."
+fi
+EOF

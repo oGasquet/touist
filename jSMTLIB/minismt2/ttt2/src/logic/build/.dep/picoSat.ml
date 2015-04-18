@@ -1,0 +1,2 @@
+src/logic/build/picoSat.cmx: src/logic/build/assignment.cmx src/logic/build/binMinf.cmx src/logic/build/binType.cmx src/logic/build/formula.cmx src/logic/build/miniSat.cmx src/logic/build/monad.cmx src/logic/build/state.cmx src/util/util.cmxa
+src/logic/build/picoSat.cmo: src/logic/build/assignment.cmo src/logic/build/binMinf.cmo src/logic/build/binType.cmo src/logic/build/formula.cmo src/logic/build/miniSat.cmo src/logic/build/monad.cmo src/logic/build/state.cmo src/util/util.cma

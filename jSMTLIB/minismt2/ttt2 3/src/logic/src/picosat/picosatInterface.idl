@@ -1,0 +1,7 @@
+void picosat_init (void);
+int picosat_enable_trace_generation (void);
+int picosat_add (int lit);
+int picosat_sat (int decision_limit);
+int picosat_deref (int lit);
+boolean picosat_coreclause (int i);
+void picosat_reset (void);

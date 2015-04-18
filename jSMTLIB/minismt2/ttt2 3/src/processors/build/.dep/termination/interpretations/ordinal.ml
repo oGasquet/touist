@@ -1,0 +1,2 @@
+src/processors/build/termination/interpretations/ordinal.cmx: src/logic/logic.cmxa src/processors/build/rewriting/rewritingx.cmx src/processors/build/rewriting/rule.cmx src/processors/build/rewriting/signature.cmx src/processors/build/rewriting/term.cmx src/util/util.cmxa
+src/processors/build/termination/interpretations/ordinal.cmo: src/logic/logic.cma src/processors/build/rewriting/rewritingx.cmo src/processors/build/rewriting/rule.cmo src/processors/build/rewriting/signature.cmo src/processors/build/rewriting/term.cmo src/util/util.cma

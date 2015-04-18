@@ -1,0 +1,2 @@
+src/processors/build/predicate/isWcr.cmx: src/processors/build/rewriting/diagram.cmx src/processors/build/rewriting/monad.cmx src/processors/build/problem.cmx src/processors/build/rewriting/rewritingx.cmx src/util/util.cmxa
+src/processors/build/predicate/isWcr.cmo: src/processors/build/rewriting/diagram.cmo src/processors/build/rewriting/monad.cmo src/processors/build/problem.cmo src/processors/build/rewriting/rewritingx.cmo src/util/util.cma

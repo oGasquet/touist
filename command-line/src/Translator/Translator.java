@@ -41,8 +41,8 @@ import java.util.StringTokenizer;
  * @Modified by Mael
  */
 public class Translator {
-	final private String outputFilePath = "out.cnf";
-	final private String outputTableFilePath = "out.table";
+	private String outputFilePath = "out.cnf";
+	private String outputTableFilePath = "out.table";
 	private String translatorProgramFilePath;
 	private Map<Integer,String> literalsMap = new HashMap<Integer,String>();
 	private List<Translator.Error> errors;
@@ -129,7 +129,7 @@ public class Translator {
 				+ " -table " + outputTableFilePath
 				+ " " + bigandFilePath;
 		this.p = Runtime.getRuntime().exec(cmd);
-        System.out.println("translate(): cmd executed: "+cmd);
+       // System.out.println("translate(): cmd executed: "+cmd);
 		int return_code = p.waitFor();
 		BufferedReader stdout = new BufferedReader(new InputStreamReader(
 				this.p.getInputStream()));
@@ -221,5 +221,13 @@ public class Translator {
 		}
 		br.close();
 	}
+        
+         public void setOutputFilePath(String outputFilePath) {
+        this.outputFilePath = outputFilePath;
+    }
+
+    public void setOutputTableFilePath(String outputTableFilePath) {
+        this.outputTableFilePath = outputTableFilePath;
+    }
 
 }

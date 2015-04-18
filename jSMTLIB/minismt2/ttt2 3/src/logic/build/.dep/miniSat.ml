@@ -1,0 +1,2 @@
+src/logic/build/miniSat.cmx: src/logic/build/assignment.cmx src/logic/build/binNumber.cmx src/logic/build/formula.cmx src/logic/build/monad.cmx src/logic/build/number.cmx src/logic/build/state.cmx src/util/util.cmxa
+src/logic/build/miniSat.cmo: src/logic/build/assignment.cmo src/logic/build/binNumber.cmo src/logic/build/formula.cmo src/logic/build/monad.cmo src/logic/build/number.cmo src/logic/build/state.cmo src/util/util.cma

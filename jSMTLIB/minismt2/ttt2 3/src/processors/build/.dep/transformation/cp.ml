@@ -1,0 +1,2 @@
+src/processors/build/transformation/cp.cmx: src/processors/build/rewriting/monad.cmx src/processors/build/problem.cmx src/processors/build/rewriting/rewritingx.cmx src/util/util.cmxa src/processors/build/xmlOutput.cmx
+src/processors/build/transformation/cp.cmo: src/processors/build/rewriting/monad.cmo src/processors/build/problem.cmo src/processors/build/rewriting/rewritingx.cmo src/util/util.cma src/processors/build/xmlOutput.cmo

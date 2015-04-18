@@ -1,0 +1,65 @@
+Welcome to TTT2.
+
+Before compiling, check if you have at least
+ - ocaml 3.12
+ - camlidl 1.05
+
+The following programs and libraries may already be available on your machine:
+ - gcc-c++ (provides g++)
+ - zlib-devel 
+ - glibc-static 2.12-1(if you compile static)
+ - libxslt-devel
+ - libxml-devel
+ - pkg-config
+
+To compile, type
+
+ $ make
+
+To run the tool, type
+ 
+ $ ./ttt2 <file>
+
+To run the tool in its competition mode, type
+ 
+ $ ./ttt2 -s COMP -c comp.conf <file>
+
+To generate (html) documentation, type
+
+ $ make doc
+
+After successful compilation you can type
+
+ $ make clean
+
+to clean up compiled sources.
+
+See mk/README for a list of other available targets.
+
+Information about the implementation of TTT2 can be found in
+
+ $ doc/index.html
+
+Never forget that you can also ask TTT2 itself, e.g., 
+
+ $ ./ttt2 --help
+
+shows a list of options and explains the strategy language,
+
+ $ ./ttt2 --processors
+
+gives a comprehensive list of (non)termination processors.
+Furthermore most processors can explain their flags, e.g., 
+
+ $ ./ttt2 -s 'matrix --help' <trs>
+
+prints the flags one can specify for the matrix processor (for
+internal reasons a TRS must be specified).
+
+Yices: By default ttt2 is compiled w/o yices ($DISABLE_Yices=1).
+If you want to compile the tool with it get yices 1.0.11 headers and
+libs (download them from http://yices.csl.sri.com/download-old.shtml
+and put them in src/logic/src/yices/XXbit/), type 
+
+ $ make clean-logic; make DISABLE_Yices= 
+

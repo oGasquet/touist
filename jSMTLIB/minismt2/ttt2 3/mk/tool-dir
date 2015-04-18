@@ -1,0 +1,26 @@
+#! /bin/sh
+# Collect source files for ttt2 / csi / cat.
+
+umask 022
+
+DIR=build/$1
+
+if [ -z "$1" ]; then
+    echo "usage: $0 (cat|csi|ttt2)"
+    exit 1
+fi
+
+if [ ! -d "$DIR" ]; then
+    echo "$DIR/ does not exist."
+    exit 1
+fi
+
+cp -r src/ mk/ Makefile README $DIR
+rm -rf $DIR/src/papers $DIR/src/experiments $DIR/src/tests
+rm -f $DIR/src/logic/src/yices/32bit/include/*
+rm -f $DIR/src/logic/src/yices/32bit/lib/*
+rm -f $DIR/src/logic/src/yices/64bit/include/*
+rm -f $DIR/src/logic/src/yices/64bit/lib/*
+rm -f $DIR/src/logic/src/yices/bin/*
+rm -f $DIR/mk/tool-online
+( cd $DIR; [ -f ttt2 ] && mv ttt2 ttt2.bak; make -s distclean; [ -f ttt2.bak ] && mv ttt2.bak ttt2 )
